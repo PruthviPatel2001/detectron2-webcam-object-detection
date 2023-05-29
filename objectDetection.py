@@ -7,9 +7,8 @@ from detectron2.data import MetadataCatalog
 from detectron2.model_zoo import model_zoo
 import uuid
 import os
-from PIL import Image
-import time
 
+from utils.jpgConverter import convertToJPG
 
 from firebase_files.index import upload_to_firebase
 
@@ -56,8 +55,7 @@ while True:
         cv2.waitKey(10000)
 
         # Convert the image to bytes for storing in firebase
-        _, image_encoded = cv2.imencode('.jpg', frame)
-        image_bytes = image_encoded.tobytes()
+        converted_img = convertToJPG(frame)
 
         # Getting the labels of the detected objects
         labels = [MetadataCatalog.get(
@@ -70,7 +68,7 @@ while True:
             print("Uploading image to Firebase Storage...")
 
             uploaded_image_url = upload_to_firebase(
-                filename, image_bytes, labels[0])
+                filename, converted_img, labels[0])
 
         except Exception as e:
 

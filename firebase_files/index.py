@@ -7,11 +7,6 @@ from datetime import datetime
 import geocoder
 from firebase_admin import db
 
-# datetime object containing current date and time
-
-
-# dd/mm/YY H:M:S
-
 
 cred = credentials.Certificate(
     "/Users/pruthvipatel/Desktop/StrandAid_Object_Detection/firebase_files/strandaid-16e48-firebase-adminsdk-1dltc-e05e292a85.json")
@@ -19,10 +14,6 @@ firebase_admin.initialize_app(cred, {
     'storageBucket': 'strandaid-16e48.appspot.com',
     'databaseURL': 'https://strandaid-16e48-default-rtdb.firebaseio.com/'
 })
-
-# realtime_db = firebase_admin.initialize_app(cred, {
-
-# })
 
 
 def addDataToFireBase(image_url, label):
